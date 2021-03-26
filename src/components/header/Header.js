@@ -3,11 +3,11 @@ import { Alert } from "react-bootstrap";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
-import './styles.scss'
+import "./styles.scss";
 
 const Header = (_props) => {
   const history = useHistory();
-  const { login, currentUser, logout } = useAuth();
+  const { login, currentUser, logout, signup } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -21,8 +21,15 @@ const Header = (_props) => {
       await login(email, password);
       setLoading(false);
     } catch (error) {
+      switch (error.code) {
+        case "auth/user-not-found":
+          await signup(email, password);
+          break;
+        default:
+          setError(error.message);
+          break;
+      }
       console.log(error);
-      setError(error.message);
     }
   };
 
@@ -57,7 +64,11 @@ const Header = (_props) => {
           type="password"
           onChange={(event) => setPassword(event.target.value)}
         />
-        <button className="login-btn" disabled={loading} onClick={() => handleLogin()}>
+        <button
+          className="login-btn"
+          disabled={loading}
+          onClick={() => handleLogin()}
+        >
           Login / Register
         </button>
       </div>
@@ -68,10 +79,18 @@ const Header = (_props) => {
     return (
       <div className="d-flex">
         <p>Welcome {currentUser?.email}</p>
-        <button style={{ margin: '0 10px' }} disabled={loading} onClick={() => onClickShare()}>
+        <button
+          style={{ margin: "0 10px" }}
+          disabled={loading}
+          onClick={() => onClickShare()}
+        >
           Share a movie
         </button>
-        <button style={{ margin: '0 10px' }} disabled={loading} onClick={() => handleLogout()}>
+        <button
+          style={{ margin: "0 10px" }}
+          disabled={loading}
+          onClick={() => handleLogout()}
+        >
           Logout
         </button>
       </div>
