@@ -1,10 +1,10 @@
 import { database } from "../firebase";
 
-const db = database.ref('videos')
+const db = database.ref("videos");
 
 class VideoDataService {
   getAll() {
-    return db;
+    return db.once('value');
   }
 
   create(video) {
@@ -12,7 +12,8 @@ class VideoDataService {
   }
 
   update(key, value) {
-    return db.child(key).update(value);
+    console.log('value', value)
+    return database.ref(`videos/${key}`).update(value)
   }
 
   delete(key) {

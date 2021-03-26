@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import VideoDataService from "../services/videos";
-import { getInfoFromAUrl } from "../utils/youtube";
+import { getId, getInfoFromAUrl } from "../utils/youtube";
 
 const ShareVideo = () => {
   const { currentUser } = useAuth();
@@ -15,28 +15,24 @@ const ShareVideo = () => {
     }
 
     try {
+      const id = getId(url);
       const data = await getInfoFromAUrl(url);
-      console.log(("data", data));
+      const video = {
+        title: data?.items[0].snippet.title,
+        shareBy: currentUser?.email,
+        like: 0,
+        dislike: 0,
+        description: data?.items[0].snippet.title,
+        src: `https://www.youtube.com/embed/${id}`
+      };
+      await VideoDataService.create(video);
+      setUrl("");
+      alert("Thanks for sharing");
     } catch (error) {
       console.log("error", error);
     }
   };
 
-  const onClickTestUpDatabase = async () => {
-    const data = {
-      title: 'sdfsdf',
-      description: 'sdfsdfsdf',
-      published: false
-    };
-
-    try {
-      const res = await VideoDataService.create(data)
-      console.log('resss', res)
-    } catch (error) {
-      console.log('error', error)
-    }
-
-  }
   return (
     <div>
       <p>Share your Youtube video here</p>
@@ -46,7 +42,6 @@ const ShareVideo = () => {
         onChange={(e) => setUrl(e.target.value)}
       />
       <button onClick={() => onClickShare()}>Share</button>
-      <button onClick={() => onClickTestUpDatabase()}>Up</button>
     </div>
   );
 };

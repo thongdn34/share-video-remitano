@@ -1,33 +1,31 @@
-import React, { useContext, useState, useEffect } from "react"
-import { auth } from "../firebase"
+import React, { useContext, useState } from "react";
+import VideoDataService from "../services/videos";
 
-const VideoContext = React.createContext()
+const VideoContext = React.createContext();
 
 export function useVideo() {
-  return useContext(VideoContext)
+  return useContext(VideoContext);
 }
 
 export function VideoProvider({ children }) {
-  const [videos, setVideos] = useState([])
-  const [loading, setLoading] = useState(true)
+  const [videos, setVideos] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  // useEffect(() => {
-  //   const unsubscribe = auth.onAuthStateChanged(user => {
-  //     console.log('user', user)
-  //     setCurrentUser(user)
-  //     setLoading(false)
-  //   })
-
-  //   return unsubscribe
-  // }, [])
-
-  const value = {
-    videos
+  const getVideos = async () => {
+    setLoading(true)
+    const data = await (await VideoDataService.getAll()).val();
+    setVideos(data)
+    setLoading(false)
   }
 
+  const value = {
+    loading,
+    videos,
+    setVideos,
+    getVideos
+  };
+
   return (
-    <VideoContext.Provider value={value}>
-      {children}
-    </VideoContext.Provider>
-  )
+    <VideoContext.Provider value={value}>{children}</VideoContext.Provider>
+  );
 }

@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { Alert } from "react-bootstrap";
 import { useHistory } from "react-router";
-import { useAuth } from "../contexts/AuthContext";
+import { Link } from "react-router-dom";
+import { useAuth } from "../../contexts/AuthContext";
+import './styles.scss'
 
 const Header = (_props) => {
   const history = useHistory();
@@ -17,7 +19,7 @@ const Header = (_props) => {
       setError("");
 
       await login(email, password);
-      setLoading(false)
+      setLoading(false);
     } catch (error) {
       console.log(error);
       setError(error.message);
@@ -43,16 +45,19 @@ const Header = (_props) => {
     return (
       <div>
         <input
+          className="email"
           placeholder="email"
           value={email}
           onChange={(event) => setEmail(event.target.value)}
         />
         <input
+          className="password"
           placeholder="password"
           value={password}
+          type="password"
           onChange={(event) => setPassword(event.target.value)}
         />
-        <button disabled={loading} onClick={() => handleLogin()}>
+        <button className="login-btn" disabled={loading} onClick={() => handleLogin()}>
           Login / Register
         </button>
       </div>
@@ -61,12 +66,12 @@ const Header = (_props) => {
 
   const renderSigninedComp = () => {
     return (
-      <div>
+      <div className="d-flex">
         <p>Welcome {currentUser?.email}</p>
-        <button disabled={loading} onClick={() => onClickShare()}>
+        <button style={{ margin: '0 10px' }} disabled={loading} onClick={() => onClickShare()}>
           Share a movie
         </button>
-        <button disabled={loading} onClick={() => handleLogout()}>
+        <button style={{ margin: '0 10px' }} disabled={loading} onClick={() => handleLogout()}>
           Logout
         </button>
       </div>
@@ -74,9 +79,11 @@ const Header = (_props) => {
   };
 
   return (
-    <div>
+    <div className="header">
       <div className="d-flex justify-content-between align-items-center">
-        <h1>Funny Movies</h1>
+        <Link to="/">
+          <img src="./phim1080.png" alt="logo" width="300" />
+        </Link>
         {currentUser ? renderSigninedComp() : renderSigninComp()}
       </div>
       {error && <Alert variant="danger">{error}</Alert>}

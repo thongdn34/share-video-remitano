@@ -1,0 +1,45 @@
+.dashboard {
+  iframe {
+    margin-right: 60px;
+  }
+
+  &__block-info {
+    margin-left: 60px;
+
+    & > h2 {
+      color: red;
+    }
+  }
+
+  &__block-title {
+    .share-by {
+      font-size: 20px;
+      font-weight: bold;
+      margin-right: 30px !important;
+    }
+
+    .liked,
+    .like-light {
+      margin-right: 15px;
+    }
+  }
+
+  &__rate {
+    margin-bottom: 15px;
+  }
+
+  .like,
+  .dislike {
+    display: flex;
+    align-items: center;
+
+    & > span {
+      font-size: 20px;
+      margin-right: 5px;
+    }
+  }
+
+  .dislike {
+    margin-left: 30px;
+  }
+}

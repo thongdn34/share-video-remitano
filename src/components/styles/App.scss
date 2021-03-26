@@ -1,0 +1,37 @@
+@import "./data-uri.scss";
+
+p {
+  margin: 0 !important;
+}
+
+.bg-center-cover {
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.reaction {
+  @extend .bg-center-cover;
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+}
+
+.big-reaction {
+  @extend .reaction;
+  width: 64px;
+  height: 64px;
+}
+
+.like-light {
+  background-image: url($like-light);
+}
+
+.liked {
+  background-image: url($liked);
+}
+
+.flip {
+  transform: scale(1, -1) translate(0, -5px);
+}
