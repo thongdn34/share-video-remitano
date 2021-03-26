@@ -1,3 +1,5 @@
+import { getInfoVideo } from "../helpers/api";
+
 const getId = (url) => {
   var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
   var match = url.match(regExp);
@@ -11,17 +13,15 @@ const getId = (url) => {
 
 const getInfoFromAUrl = (url) => {
   const id = getId(url);
-  const APIKEY = ''
-  const apiUrl = `https://www.googleapis.com/youtube/v3/videos?part=snippet&id=${id}&fields=items/snippet/title,items/snippet/description&key=${APIKEY}`
 
-  return new Promise(async (resolce, reject) => {
-    const res = await 
+  return new Promise(async (resolve, reject) => {
+    try {
+      const data = await getInfoVideo(id)
+      resolve(data)
+    } catch (error) {
+      reject(error.message || 'Get info fail')
+    }
   })
-  try {
-    
-  } catch (error) {
-    
-  }
 }
 
-export { getId };
+export { getId, getInfoFromAUrl };

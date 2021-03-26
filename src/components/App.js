@@ -8,6 +8,8 @@ import Login from "./Login";
 import PrivateRoute from "./PrivateRoute";
 import ForgotPassword from "./ForgotPassword";
 import Header from "./Header";
+import { VideoProvider } from "../contexts/VideosContext";
+import ShareVideo from "./ShareVideo";
 
 function App() {
   return (
@@ -19,13 +21,16 @@ function App() {
         <Router>
           <React.Fragment>
             <AuthProvider>
-              <Header />
-              <Switch>
-                <PrivateRoute exact path="/" component={Dashboard} />
-                <Route path="/signup" component={Signup} />
-                <Route path="/login" component={Login} />
-                <Route path="/forgot-password" component={ForgotPassword} />
-              </Switch>
+              <VideoProvider>
+                <Header />
+                <Switch>
+                  <Route exact path="/" component={Dashboard} />
+                  <Route path="/signup" component={Signup} />
+                  <Route path="/login" component={Login} />
+                  <Route path="/forgot-password" component={ForgotPassword} />
+                  <Route path="/share" component={ShareVideo} />
+                </Switch>
+              </VideoProvider>
             </AuthProvider>
           </React.Fragment>
         </Router>

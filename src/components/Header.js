@@ -12,11 +12,12 @@ const Header = (_props) => {
   const [loading, setLoading] = useState(false);
 
   const handleLogin = async () => {
+    setLoading(true);
     try {
       setError("");
-      setLoading(true);
 
       await login(email, password);
+      setLoading(false)
     } catch (error) {
       console.log(error);
       setError(error.message);
