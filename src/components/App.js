@@ -21,6 +21,7 @@ function App() {
                 <Header />
                 <Switch>
                   <Route exact path="/" component={Dashboard} />
+                  <Route exact path="/share-video-remitano" component={Dashboard} />
                   <Route path="/signup" component={Signup} />
                   <Route path="/login" component={Login} />
                   <Route path="/share" component={ShareVideo} />
