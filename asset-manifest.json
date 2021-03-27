@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/share-video-remitano/static/css/main.c445cb35.chunk.css",
-    "main.js": "/share-video-remitano/static/js/main.c2e01b46.chunk.js",
-    "main.js.map": "/share-video-remitano/static/js/main.c2e01b46.chunk.js.map",
+    "main.js": "/share-video-remitano/static/js/main.ab3a810e.chunk.js",
+    "main.js.map": "/share-video-remitano/static/js/main.ab3a810e.chunk.js.map",
     "runtime-main.js": "/share-video-remitano/static/js/runtime-main.644ca377.js",
     "runtime-main.js.map": "/share-video-remitano/static/js/runtime-main.644ca377.js.map",
     "static/css/2.74b270cf.chunk.css": "/share-video-remitano/static/css/2.74b270cf.chunk.css",
@@ -18,6 +18,6 @@
     "static/css/2.74b270cf.chunk.css",
     "static/js/2.1283808e.chunk.js",
     "static/css/main.c445cb35.chunk.css",
-    "static/js/main.c2e01b46.chunk.js"
+    "static/js/main.ab3a810e.chunk.js"
   ]
 }
